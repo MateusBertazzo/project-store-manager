@@ -18,8 +18,8 @@ describe('testando productsService', function () {
     // act
     const result = await productsService.getAll();
     // asse
-    expect(result.status).to.be.equal('SUCCESFUL');
-    expect(result.message).to.be.deep.equal([allProducts]);
+    expect(result.status).to.be.equal('SUCCESSFUL');
+    expect(result.products).to.be.deep.equal([allProducts]);
   });
 
   it('testando a func getById da productServices', async function () {
@@ -29,8 +29,8 @@ describe('testando productsService', function () {
     const id = 1;
     const result = await productsService.getById(id);
     // asse
-    expect(result.status).to.be.equal('SUCCESFUL');
-    expect(result.message).to.be.deep.equal([allProducts[0]]);
+    expect(result.status).to.be.equal('SUCCESSFUL');
+    expect(result.products).to.be.deep.equal([allProducts[0]]);
   });
 
   it('testando a func getById da productServices que retorna um erro caso passado "id" que nao exista no banco', async function () {
@@ -41,6 +41,6 @@ describe('testando productsService', function () {
     const result = await productsService.getById(incorrectId);
     // asse
     expect(result.status).to.be.equal('PRODUCT_NOT_FOUND');
-    expect(result.message).to.be.equal('Product not found');
+    expect(result.products.message).to.be.equal('Product not found');
   });
 });

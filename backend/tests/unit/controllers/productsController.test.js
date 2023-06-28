@@ -1,34 +1,59 @@
-// const chai = require('chai');
-// const sinon = require('sinon');
-// const sinonChai = require('sinon-chai');
+const chai = require('chai');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 
-// const { expect } = chai;
-// chai.use(sinonChai);
+const { expect } = chai;
+chai.use(sinonChai);
 
-// const { allProducts } = require('../mocks/modelMocks');
-// const { productsService } = require('../../../src/services');
-// const { productsController } = require('../../../src/controllers');
+const { 
+  allProductsAndStatus, 
+  allProducts,
+  productByIdAndStatus,
+ } = require('../mocks/modelMocks');
+const { productsService } = require('../../../src/services');
+const { productsControllers } = require('../../../src/controllers');
 
-// describe('testando productsService da camada Controller', function () {
-//   const req = {};
-//   const res = {};
-//   // TIRADO DA MONITORIA DA TURMA 28 TRIBO B MENTORIA DE TESTES
-//   beforeEach(function () {
-//     res.status = sinon.stub().returns(res);
-//     res.json = sinon.stub().returns(res);
-//   });
+describe('testando productsService da camada Controller', function () {
+  afterEach(function () {
+    sinon.restore();
+  });
 
-//   afterEach(function () {
-//     sinon.restore();
-//   });
+  it('testando retorno da func getAll camada controller', async function () {
+    // arrange 
+    sinon.stub(productsService, 'getAll').resolves(allProductsAndStatus);
 
-//   it('testando retorno da func getAll camada controller', async function () {
-//     // arrange
-//     sinon.stub(productsService, 'getAll').resolves({ status: 'SUCCESFUL', message: allProducts });
-//     // act
-//     await productsController.getAll(req, res);
-//     // asser
-//     expect(res.status).to.have.been.calledWith(200);
-//     expect(res.json).to.have.been.calledWithExactly();
-//   });
-// });
+    const req = {
+      body: { },
+    };
+
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    // act
+    await productsControllers.getAll(req, res);
+    // asser
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(allProducts);
+  });
+
+  it('testando o getById da camada controller', async function () {
+     // arrange 
+     sinon.stub(productsService, 'getById').resolves(productByIdAndStatus);
+
+     const req = {
+       params: { id: 1 },
+       body: { },
+     };
+ 
+     const res = {
+       status: sinon.stub().returnsThis(),
+       json: sinon.stub(),
+     };
+     // act
+     await productsControllers.getById(req, res);
+     // asser
+     expect(res.status).to.have.been.calledWith(200);
+     expect(res.json).to.have.been.calledWith(productByIdAndStatus.products);
+  });
+});
