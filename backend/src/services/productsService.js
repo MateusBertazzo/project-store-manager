@@ -3,13 +3,16 @@ const { productsModel } = require('../models');
 const findAll = async () => {
   const products = await productsModel.findAll();
 
-  return { status: 'SUCCESFUL', data: products };
+  return { status: 'SUCCESFUL', message: products };
 };
 
 const findById = async (id) => {
   const products = await productsModel.findById(id);
 
-  return { status: 'SUCCESFUL', data: products };
+  if (!products) {
+    return { status: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
+  }
+  return { status: 'SUCCESFUL', message: products };
 };
 
 module.exports = {
