@@ -41,8 +41,14 @@ const productByIdAndStatus = {
   ],
 };
 
+const productByIdNotFound = {
+  status: 'PRODUCT_NOT_FOUND',
+  products: { message: 'Product not found' },
+};
+
 module.exports = {
   allProducts,
   allProductsAndStatus,
   productByIdAndStatus,
+  productByIdNotFound,
 };
