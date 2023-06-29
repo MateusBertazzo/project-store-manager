@@ -10,10 +10,10 @@ const getById = async (id) => {
   const products = await productsModel.getById(id);
 
   if (!products) {
-    return { status: 'PRODUCT_NOT_FOUND', products: { message: 'Product not found' } };
+    return { status: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
   }
 
-  return { status: 'SUCCESSFUL', products };
+  return { status: 'SUCCESSFUL', message: products };
 };
 
 const insertProduct = async (name) => {
@@ -21,10 +21,16 @@ const insertProduct = async (name) => {
   return { status: 'SUCCESSFUL', products };
 };
 
-const updateProduct = async (id, name) => {
-  const products = await productsModel.updateProduct(id, name);
+const updateProduct = async (name, id) => {
+  const products = await getById(id);
 
-  return { status: 'SUCCESSFUL', products };
+  if (products.status !== 'SUCCESSFUL') {
+    return { status: 'ID_NOT_FOUND', message: 'Product not found' };
+  }
+
+  const product = await productsModel.updateProduct(name, id);
+  
+  return { status: 'SUCCESSFUL', message: product };
 };
 
 const deleteProductId = async (id) => {

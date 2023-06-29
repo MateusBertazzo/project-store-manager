@@ -20,7 +20,7 @@ const insertProduct = async (name) => {
   return { id: insertId, name };
 };
 
-const updateProduct = async (id, name) => {
+const updateProduct = async (name, id) => {
   const query = 'UPDATE StoreManager.products SET name = ? WHERE id = ?';
   await connection.execute(query, [name, id]);
   return { id, name };

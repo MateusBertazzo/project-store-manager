@@ -8,13 +8,13 @@ const getAll = async (_req, res) => {
 
 const getById = async (req, res) => {
   const { id } = req.params;
-  const { status, products } = await productsService.getById(id);
+  const { status, message } = await productsService.getById(id);
 
   if (status === 'PRODUCT_NOT_FOUND') {
-    return res.status(404).json(products);
+    return res.status(404).json({ message });
   }
 
-  return res.status(200).json(products);
+  return res.status(200).json(message);
 };
 
 const insertProduct = async (req, res) => {
@@ -26,11 +26,16 @@ const insertProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-  const { name } = req.body;
   const { id } = req.params;
+  const { name } = req.body;
 
-  const products = await productsService.updateProduct(id, name);
-  return res.status(200).json(products.products);
+  const { status, message } = await productsService.updateProduct(name, Number(id));
+
+  if (status === 'ID_NOT_FOUND') {
+    return res.status(404).json({ message });
+  }
+
+  return res.status(200).json(message);
 };
 
 const deleteProductId = async (req, res) => {

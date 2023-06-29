@@ -56,7 +56,7 @@ describe('testando productsService da camada Controller', function () {
      await productsControllers.getById(req, res);
      // asser
      expect(res.status).to.have.been.calledWith(200);
-     expect(res.json).to.have.been.calledWith(productByIdAndStatus.products);
+     expect(res.json).to.have.been.calledWith(productByIdAndStatus.message);
   });
 
   it('Testa que se passado um Id que nao exista no banco retorna 404', async function () {

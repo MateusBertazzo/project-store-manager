@@ -30,7 +30,7 @@ describe('testando productsService da camada service', function () {
     const result = await productsService.getById(id);
     // asse
     expect(result.status).to.be.equal('SUCCESSFUL');
-    expect(result.products).to.be.deep.equal([allProducts[0]]);
+    expect(result.message).to.be.deep.equal([allProducts[0]]);
   });
 
   it('testando a func getById da productServices que retorna um erro caso passado "id" que nao exista no banco', async function () {
@@ -41,6 +41,6 @@ describe('testando productsService da camada service', function () {
     const result = await productsService.getById(incorrectId);
     // asse
     expect(result.status).to.be.equal('PRODUCT_NOT_FOUND');
-    expect(result.products.message).to.be.equal('Product not found');
+    expect(result.message).to.be.equal('Product not found');
   });
 });

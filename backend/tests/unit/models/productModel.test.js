@@ -32,9 +32,9 @@ describe('testando productsModel da camada Model', function () {
   it('testando a func updateProduct', async function () {
     sinon.stub(connection, 'execute').resolves();
 
-    const result = await productsModel.updateProduct(1, 'Mateus');
+    const result = await productsModel.updateProduct('Mateus', 1);
 
-    expect(result).to.be.deep.equal({ id: 1, name: 'Mateus' });
+    expect((result)).to.be.deep.equal({ name: 'Mateus', id: 1 });
   });
 
   it('testando a func de deleteProductId', async function () {
