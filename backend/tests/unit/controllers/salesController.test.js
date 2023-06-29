@@ -70,5 +70,5 @@ describe('testa camada Controller da salesController', function () {
   await salesControllers.getByIdSale(req, res);
   // asser
   expect(res.status).to.have.been.calledWith(404);
-});
+  });
 });
