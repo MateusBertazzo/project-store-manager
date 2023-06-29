@@ -28,4 +28,20 @@ describe('testando productsModel da camada Model', function () {
     // asse
     expect(result).to.be.deep.equal(allProducts[0]);
   });
+
+  it('testando a func updateProduct', async function () {
+    sinon.stub(connection, 'execute').resolves();
+
+    const result = await productsModel.updateProduct(1, 'Mateus');
+
+    expect(result).to.be.deep.equal({ id: 1, name: 'Mateus' });
+  });
+
+  it('testando a func de deleteProductId', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+
+    const result = await productsModel.deleteProductId(1);
+
+    expect(result).to.be.deep.equal({ affectedRows: 1 });
+  });
 });
