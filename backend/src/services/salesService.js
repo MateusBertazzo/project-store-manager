@@ -9,7 +9,7 @@ const getAllSale = async () => {
 const getByIdSale = async (id) => {
   const products = await salesModel.getByIdSale(id);
 
-  if (products.length === 0) {
+  if (!products || products.length === 0) {
     return { status: 'SALE_NOT_FOUND', products: { message: 'Sale not found' } };
   }
 

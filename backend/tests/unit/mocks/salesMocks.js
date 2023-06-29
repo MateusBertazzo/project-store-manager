@@ -58,8 +58,27 @@ const allSalesAndStatus = {
   ],
 };
 
+const saleByIdAndStatus = {
+  status: 'SUCCESSFUL',
+  products: [
+    {
+      date: date1,
+      saleId: 2,
+      productId: 3,
+      quantity: 15,
+    },
+  ],
+};
+
+const saleNotFound = {
+  status: 'SALE_NOT_FOUND',
+  products: { message: 'Sale not found' },
+};
+
 module.exports = {
   allSales,
   salesById,
   allSalesAndStatus,
+  saleByIdAndStatus,
+  saleNotFound,
 };
