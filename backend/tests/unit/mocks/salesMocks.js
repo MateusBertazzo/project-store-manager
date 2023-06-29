@@ -19,6 +19,20 @@ const allSales = [
   },
 ];
 
+const salesById = [
+  {
+    date: '2023-06-28T21:40:52.000Z',
+    productId: 1,
+    quantity: 5,
+  },
+  {
+    date: '2023-06-28T21:40:52.000Z',
+    productId: 2,
+    quantity: 10,
+  },
+];
+
 module.exports = {
   allSales,
+  salesById,
 };
