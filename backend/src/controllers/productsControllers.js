@@ -41,10 +41,10 @@ const updateProduct = async (req, res) => {
 const deleteProductId = async (req, res) => {
   const { id } = req.params;
 
-  const { status } = await productsService.deleteProductId(id);
+  const { status, message } = await productsService.deleteProductId(id);
 
   if (status === 'ID_NOT_FOUND') {
-    return res.status(404).json({ message: 'Product not found' });
+    return res.status(404).json({ message });
   }
   
   return res.status(204).json();

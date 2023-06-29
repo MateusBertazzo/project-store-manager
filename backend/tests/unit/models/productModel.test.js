@@ -37,6 +37,19 @@ describe('testando productsModel da camada Model', function () {
     expect((result)).to.be.deep.equal({ name: 'Mateus', id: 1 });
   });
 
+  it('testando a func insertProduct', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
+
+    const result = await productsModel.insertProduct('cafeteira');
+
+    const cafeteira = {
+      id: 1,
+      name: 'cafeteira',
+    };
+
+    expect(result).to.be.deep.equal(cafeteira);
+  });
+
   it('testando a func de deleteProductId', async function () {
     sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
 
@@ -45,3 +58,7 @@ describe('testando productsModel da camada Model', function () {
     expect(result).to.be.deep.equal({ affectedRows: 1 });
   });
 });
+
+// {
+//   "message": "Product not found"
+// }

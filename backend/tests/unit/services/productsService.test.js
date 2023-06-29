@@ -43,4 +43,42 @@ describe('testando productsService da camada service', function () {
     expect(result.status).to.be.equal('PRODUCT_NOT_FOUND');
     expect(result.message).to.be.equal('Product not found');
   });
+
+  it('testando func insertProduct', async function () {
+    const cafeteira = {
+      id: 1,
+      name: 'cafeteira',
+    };
+    sinon.stub(productsModel, 'insertProduct').resolves(cafeteira);
+
+    const result = await productsService.insertProduct('cafeteira');
+
+    expect(result.status).to.be.deep.equal('SUCCESSFUL');
+    expect(result.products).to.be.deep.equal(cafeteira);
+  });
+
+  it('testando func updateProduct', async function () {
+    const update = {
+      name: 'Mateus',
+      id: 1,
+    };
+    sinon.stub(productsModel, 'getById').resolves('SUCCESSFUL');
+
+    sinon.stub(productsModel, 'updateProduct').resolves(update);
+
+    const result = await productsService.updateProduct('mateus', 1);
+
+    expect(result.message).to.be.deep.equal(update);
+  });
+
+  it('testando func deleteProductId', async function () {
+    sinon.stub(productsModel, 'getById').resolves('SUCCESSFUL');
+
+    sinon.stub(productsModel, 'deleteProductId').resolves({ affectedRows: 1 });
+
+    const result = await productsService.deleteProductId(1);
+
+    expect(result.status).to.be.deep.equal('SUCCESSFUL');
+    expect(result.message).to.be.deep.equal(undefined);
+  });
 });

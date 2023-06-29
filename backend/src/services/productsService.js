@@ -37,7 +37,7 @@ const deleteProductId = async (id) => {
   const products = await productsModel.getById(id);
 
   if (!products) {
-    return { status: 'ID_NOT_FOUND', products: { message: 'Product not found' } };
+    return { status: 'ID_NOT_FOUND', message: 'Product not found' };
   }
 
   await productsModel.deleteProductId(id);
