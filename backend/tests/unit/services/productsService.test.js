@@ -7,7 +7,7 @@ const { productsModel } = require('../../../src/models');
 
 const { expect } = chai;
 
-describe('testando productsService', function () {
+describe('testando productsService da Camada Service', function () {
   afterEach(function () {
     sinon.restore();
   });

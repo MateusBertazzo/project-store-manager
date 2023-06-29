@@ -5,7 +5,7 @@ const { productsModel } = require('../../../src/models');
 const { allProducts } = require('../mocks/modelMocks');
 const connection = require('../../../src/models/connection');
 
-describe('testando productsModel', function () {
+describe('testando productsModel da camada Model', function () {
   afterEach(function () {
     sinon.restore();
   });
