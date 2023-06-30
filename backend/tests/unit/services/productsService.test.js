@@ -57,6 +57,14 @@ describe('testando productsService da camada service', function () {
     expect(result.message).to.be.deep.equal(cafeteira);
   });
 
+  // it('testando validação dos meus middlewares', async function () {
+  //   sinon.stub(productsModel, 'insertProduct').resolves('la');
+  //   const result = await productsService.insertProduct('la');
+
+  //   expect(result.status).to.be.equal(422);
+  //   expect(result.message).to.be.deep.equal({ message: '"name" length must be at least 5 characters long' });
+  // });
+
   it('testando func updateProduct', async function () {
     const update = {
       name: 'Mateus',

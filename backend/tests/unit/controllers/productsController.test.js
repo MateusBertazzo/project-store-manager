@@ -112,4 +112,35 @@ describe('testando camada Controller', function () {
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(object);
   });
+  it('testando func de delete', async function () {
+    const res = {};
+    const req = {
+      params: { id: 1 },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(productsService, 'deleteProductId').resolves({ status: 'SUCCESSFUL' });
+
+    await productsControllers.deleteProductId(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+  });
+  it('testando func de delete caso passado ID invalido retorna um erro', async function () {
+    const res = {};
+    const req = {
+      params: { id: 666 },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(productsService, 'deleteProductId').resolves({ status: 'ID_NOT_FOUND', message: 'Product not found' });
+
+    await productsControllers.deleteProductId(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
 });

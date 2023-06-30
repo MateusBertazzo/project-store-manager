@@ -58,7 +58,3 @@ describe('testando productsModel da camada Model', function () {
     expect(result).to.be.deep.equal({ affectedRows: 1 });
   });
 });
-
-// {
-//   "message": "Product not found"
-// }
