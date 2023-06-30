@@ -4,6 +4,7 @@ const { expect } = require('chai');
 const { productsModel } = require('../../../src/models');
 const { allProducts } = require('../mocks/modelMocks');
 const connection = require('../../../src/models/connection');
+const { validateName } = require('../../../src/middlewares/validateFields');
 
 describe('testando productsModel da camada Model', function () {
   afterEach(function () {
@@ -27,6 +28,22 @@ describe('testando productsModel da camada Model', function () {
     const result = await productsModel.getById(id);
     // asse
     expect(result).to.be.deep.equal(allProducts[0]);
+  });
+
+  it('testando se name possui o  minimu de caracteres exigidos', async function () {
+    const req = {
+      body: { name: 'test name' },
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    const next = sinon.stub().returns();
+
+    validateName(req, res, next);
+
+    expect(next).to.have.been.calledWith();
   });
 
   it('testando a func updateProduct', async function () {
