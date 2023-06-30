@@ -30,7 +30,7 @@ describe('testando productsModel da camada Model', function () {
     expect(result).to.be.deep.equal(allProducts[0]);
   });
 
-  it('testando se name possui o  minimu de caracteres exigidos', async function () {
+  it('testando se name possui o minimo de caracteres exigidos', async function () {
     const req = {
       body: { name: 'test name' },
     };
@@ -44,6 +44,40 @@ describe('testando productsModel da camada Model', function () {
     validateName(req, res, next);
 
     expect(next).to.have.been.calledWith();
+  });
+
+  it('testando se o campo "name" não foi passado', async function () {
+    const req = {
+      body: { },
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    const next = sinon.stub().returns();
+
+    validateName(req, res, next);
+
+    expect(res.status).to.have.been.calledWith(400);
+    expect(res.json).to.have.been.calledWith({ message: '"name" is required' });
+  });
+
+  it('testando se name não possui o minimo de caracteres exigidos', async function () {
+    const req = {
+      body: { name: 'te' },
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+
+    const next = sinon.stub().returns();
+
+    validateName(req, res, next);
+
+    expect(res.status).to.have.been.calledWith(422);
+    expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long' });
   });
 
   it('testando a func updateProduct', async function () {
