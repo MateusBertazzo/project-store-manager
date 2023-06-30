@@ -21,14 +21,16 @@ const insertProduct = async (name) => {
 };
 
 const updateProduct = async (name, id) => {
-  const query = 'UPDATE StoreManager.products SET name = ? WHERE id = ?';
+  const query = 'UPDATE products SET name = ? WHERE id = ?';
   await connection.execute(query, [name, id]);
-  return { id, name };
+  console.log({ name, id });
+  return { name, id };
 };
 
 const deleteProductId = async (id) => {
   const query = 'DELETE from StoreManager.products WHERE id = ?';
   const [result] = await connection.execute(query, [id]);
+  console.log(result);
 
   return result;
 };

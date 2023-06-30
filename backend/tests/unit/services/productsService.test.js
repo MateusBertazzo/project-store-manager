@@ -95,6 +95,7 @@ describe('testando productsService da camada service', function () {
     expect(result.status).to.be.deep.equal('SUCCESSFUL');
     expect(result.message).to.be.deep.equal(undefined);
   });
+
   it('testando func deleteProductId caso product nao exista', async function () {
     sinon.stub(productsModel, 'getById').resolves(null);
 

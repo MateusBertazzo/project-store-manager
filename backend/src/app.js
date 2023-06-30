@@ -4,6 +4,7 @@ const sales = require('./routes/sales');
 
 const app = express();
 app.use(express.json());
+
 app.use('/products', products);
 app.use('/sales', sales);
 
