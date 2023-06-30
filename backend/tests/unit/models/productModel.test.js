@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const { productsModel } = require('../../../src/models');
 const { allProducts } = require('../mocks/modelMocks');
 const connection = require('../../../src/models/connection');
-const { validateName } = require('../../../src/middlewares/validateFields');
+const { validateName, minCaracteresName } = require('../../../src/middlewares/validateFields');
 
 describe('testando productsModel da camada Model', function () {
   afterEach(function () {
@@ -74,7 +74,7 @@ describe('testando productsModel da camada Model', function () {
 
     const next = sinon.stub().returns();
 
-    validateName(req, res, next);
+    minCaracteresName(req, res, next);
 
     expect(res.status).to.have.been.calledWith(422);
     expect(res.json).to.have.been.calledWith({ message: '"name" length must be at least 5 characters long' });

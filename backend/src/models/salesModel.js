@@ -19,7 +19,16 @@ const getByIdSale = async (id) => {
   return result;
 };
 
+const insertSales = async (saleId, sale) => {
+  const query = `INSERT INTO StorageManager
+  .sales_products (sale_id, product_id, quantity) VALUES (?,?,?)`;
+  const [result] = await connection.execute(query, [saleId, ...Object.values(sale)]);
+
+  return result;
+};
+
 module.exports = {
   getAllSale,
   getByIdSale,
+  insertSales,
 };

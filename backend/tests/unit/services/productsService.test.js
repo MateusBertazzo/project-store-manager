@@ -57,14 +57,6 @@ describe('testando productsService da camada service', function () {
     expect(result.message).to.be.deep.equal(cafeteira);
   });
 
-  // it('testando validação dos meus middlewares', async function () {
-  //   sinon.stub(productsModel, 'insertProduct').resolves('la');
-  //   const result = await productsService.insertProduct('la');
-
-  //   expect(result.status).to.be.equal(422);
-  //   expect(result.message).to.be.deep.equal({ message: '"name" length must be at least 5 characters long' });
-  // });
-
   it('testando func updateProduct', async function () {
     const update = {
       name: 'Mateus',
@@ -84,13 +76,13 @@ describe('testando productsService da camada service', function () {
       name: 'Mateus',
       id: 999,
     };
-    sinon.stub(productsModel, 'getById').resolves('ID_NOT_FOUND');
+    sinon.stub(productsModel, 'getById').resolves(null);
 
     sinon.stub(productsModel, 'updateProduct').resolves(update);
 
     const result = await productsService.updateProduct('mateus', 1);
 
-    expect(result.message).to.be.deep.equal(update);
+    expect(result).to.be.deep.equal({ status: 'ID_NOT_FOUND', message: 'Product not found' });
   });
 
   it('testando func deleteProductId', async function () {
@@ -102,5 +94,15 @@ describe('testando productsService da camada service', function () {
 
     expect(result.status).to.be.deep.equal('SUCCESSFUL');
     expect(result.message).to.be.deep.equal(undefined);
+  });
+  it('testando func deleteProductId caso product nao exista', async function () {
+    sinon.stub(productsModel, 'getById').resolves(null);
+
+    sinon.stub(productsModel, 'deleteProductId').resolves({ affectedRows: 0 });
+
+    const result = await productsService.deleteProductId(999);
+
+    expect(result.status).to.be.deep.equal('ID_NOT_FOUND');
+    expect(result.message).to.be.deep.equal('Product not found');
   });
 });
