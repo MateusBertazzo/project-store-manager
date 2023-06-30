@@ -10,6 +10,7 @@ const {
   allProducts,
   productByIdAndStatus,
   productByIdNotFound,
+  insertNewProduct,
  } = require('../mocks/modelMocks');
 
 const { productsService } = require('../../../src/services');
@@ -76,5 +77,21 @@ describe('testando productsService da camada Controller', function () {
     await productsControllers.getById(req, res);
     // asser
     expect(res.status).to.have.been.calledWith(404);
+  });
+  it('testando func insertProduct', async function () {
+    const res = {};
+    const req = { body: { name: 'Mateus' } };
+    
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    
+    const object = { id: 4, name: 'Mateus' };
+
+    sinon.stub(productsService, 'insertProduct').resolves({ status: 'SUCCESSFUL', message: object });
+
+    await productsControllers.insertProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(object);
   });
 });

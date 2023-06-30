@@ -54,7 +54,7 @@ describe('testando productsService da camada service', function () {
     const result = await productsService.insertProduct('cafeteira');
 
     expect(result.status).to.be.deep.equal('SUCCESSFUL');
-    expect(result.products).to.be.deep.equal(cafeteira);
+    expect(result.message).to.be.deep.equal(cafeteira);
   });
 
   it('testando func updateProduct', async function () {
@@ -63,6 +63,20 @@ describe('testando productsService da camada service', function () {
       id: 1,
     };
     sinon.stub(productsModel, 'getById').resolves('SUCCESSFUL');
+
+    sinon.stub(productsModel, 'updateProduct').resolves(update);
+
+    const result = await productsService.updateProduct('mateus', 1);
+
+    expect(result.message).to.be.deep.equal(update);
+  });
+
+  it('testando func updateProduct caso passado um ID inválido', async function () {
+    const update = {
+      name: 'Mateus',
+      id: 999,
+    };
+    sinon.stub(productsModel, 'getById').resolves('ID_NOT_FOUND');
 
     sinon.stub(productsModel, 'updateProduct').resolves(update);
 

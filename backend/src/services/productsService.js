@@ -18,7 +18,7 @@ const getById = async (id) => {
 
 const insertProduct = async (name) => {
   const products = await productsModel.insertProduct(name);
-  return { status: 'SUCCESSFUL', products };
+  return { status: 'SUCCESSFUL', message: products };
 };
 
 const updateProduct = async (name, id) => {

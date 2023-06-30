@@ -46,9 +46,15 @@ const productByIdNotFound = {
   products: { message: 'Product not found' },
 };
 
+const insertNewProduct = {
+  id: 4,
+  name: 'Bruno',
+};
+
 module.exports = {
   allProducts,
   allProductsAndStatus,
   productByIdAndStatus,
   productByIdNotFound,
+  insertNewProduct,
 };
