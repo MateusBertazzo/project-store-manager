@@ -15,7 +15,12 @@ const getByIdSale = async (id) => {
 
   return { status: 'SUCCESSFUL', products };
 };
+
+// const insertSales = async (sales) => {
+
+// };
 module.exports = {
   getAllSale,
   getByIdSale,
+  // insertSales,
 };

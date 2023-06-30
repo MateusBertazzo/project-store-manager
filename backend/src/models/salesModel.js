@@ -19,6 +19,12 @@ const getByIdSale = async (id) => {
   return result;
 };
 
+const createSale = async () => {
+  const query = 'INSERT INTO StoreManager.sales (date) VALUES (now())';
+  const [create] = await connection.execute(query, []);
+  return create;
+};
+
 const insertSales = async (saleId, sale) => {
   const query = `INSERT INTO StorageManager
   .sales_products (sale_id, product_id, quantity) VALUES (?,?,?)`;
@@ -31,4 +37,5 @@ module.exports = {
   getAllSale,
   getByIdSale,
   insertSales,
+  createSale,
 };

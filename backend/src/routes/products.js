@@ -5,8 +5,8 @@ const { validateName, minCaracteresName } = require('../middlewares/validateFiel
 const router = express.Router();
 router.get('/', productsControllers.getAll);
 router.get('/:id', productsControllers.getById);
-router.post('/', minCaracteresName, validateName, productsControllers.insertProduct);
-router.put('/:id', minCaracteresName, validateName, productsControllers.updateProduct);
+router.post('/', validateName, minCaracteresName, productsControllers.insertProduct);
+router.put('/:id', validateName, minCaracteresName, productsControllers.updateProduct);
 router.delete('/:id', productsControllers.deleteProductId);
 
 module.exports = router;
