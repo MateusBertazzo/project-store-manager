@@ -10,13 +10,12 @@ const {
   allProducts,
   productByIdAndStatus,
   productByIdNotFound,
-  insertNewProduct,
  } = require('../mocks/modelMocks');
 
 const { productsService } = require('../../../src/services');
 const { productsControllers } = require('../../../src/controllers');
 
-describe('testando productsService da camada Controller', function () {
+describe('testando camada Controller', function () {
   afterEach(function () {
     sinon.restore();
   });
@@ -78,6 +77,7 @@ describe('testando productsService da camada Controller', function () {
     // asser
     expect(res.status).to.have.been.calledWith(404);
   });
+
   it('testando func insertProduct', async function () {
     const res = {};
     const req = { body: { name: 'Mateus' } };
@@ -92,6 +92,24 @@ describe('testando productsService da camada Controller', function () {
     await productsControllers.insertProduct(req, res);
 
     expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(object);
+  });
+
+  it('testando func de update', async function () {
+    const res = {};
+    const req = {
+      body: { name: 'Mateus' },
+      params: { id: 1 },
+    };
+    const object = { name: 'Mateus', id: 1 };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(productsService, 'updateProduct').resolves({ status: 'SUCCESSFUL', message: object });
+
+    await productsControllers.updateProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(object);
   });
 });
