@@ -21,13 +21,13 @@ const getByIdSale = async (id) => {
 
 const createSale = async () => {
   const query = 'INSERT INTO StoreManager.sales (date) VALUES (now())';
-  const [create] = await connection.execute(query, []);
+  const [create] = await connection.execute(query);
   return create;
 };
 
 const insertSales = async (saleId, sale) => {
-  const query = `INSERT INTO StorageManager
-  .sales_products (sale_id, product_id, quantity) VALUES (?,?,?)`;
+  const query = 'INSERT INTO StoreManager.sales_products' 
+  + ' (sale_id, product_id, quantity) VALUES (?,?,?)';
   const [result] = await connection.execute(query, [saleId, ...Object.values(sale)]);
 
   return result;
@@ -36,6 +36,6 @@ const insertSales = async (saleId, sale) => {
 module.exports = {
   getAllSale,
   getByIdSale,
-  insertSales,
   createSale,
+  insertSales,
 };
