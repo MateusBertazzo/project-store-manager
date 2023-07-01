@@ -19,10 +19,12 @@ const getByIdSale = async (req, res) => {
 
 const insertSales = async (req, res) => {
   const newSale = req.body;
+  const sale = await salesService.insertSales(newSale);
+  // if (status !== 'ERRO_NOT_FOUND') {
+  //   return res.status(400).json({ message });
+  // }
 
-  const { message } = await salesService.insertSales(newSale);
-
-  return res.status(201).json(message);
+  return res.status(201).json(sale);
 };
 
 module.exports = {
