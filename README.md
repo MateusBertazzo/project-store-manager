@@ -15,6 +15,7 @@
   - `Mocha`;
   - `Node.js`;
   - `Express`;
+  - `Arquitetura de Software - MSC`
 
 
   <summary><strong>Como rodar o projeto</strong></summary></br>
